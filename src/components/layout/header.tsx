@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <Layout.Header style={headerStyles}>
       <Space align="center" size="middle">
-        <CurrentUser />
+        {/* <CurrentUser /> */}
       </Space>
     </Layout.Header>
   )

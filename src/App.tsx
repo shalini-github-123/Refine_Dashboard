@@ -89,7 +89,6 @@ function App() {
                 <DocumentTitleHandler />
               </Refine>
               </CurrentUserProvider>
-              <DevtoolsPanel />
             </DevtoolsProvider>
           </AntdApp>
       </RefineKbarProvider>
