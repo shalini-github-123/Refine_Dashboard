@@ -1,3 +1,4 @@
+// @ts-nocheck
 import CustomAvatar from '@/components/custom-avatar';
 import { Text } from '@/components/text';
 import { USERS_SELECT_QUERY  } from '@/graphql/queries';

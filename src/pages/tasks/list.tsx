@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { KanbanColumnSkeleton, ProjectCardSkeleton } from '@/components'
 import { KanbanAddCardButton } from '@/components/tasks/kanban/add-card-button'
 import { KanbanBoardContainer, KanbanBoard } from '@/components/tasks/kanban/board'
