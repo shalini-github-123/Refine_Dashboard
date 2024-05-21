@@ -1,36 +1,26 @@
 import React from "react";
-import { Form, Input, Select, Modal } from "antd";
+import { Form, Input, Select, Modal, Drawer, Button } from "antd";
 import { useModalForm } from "@refinedev/antd";
 import { useGo } from "@refinedev/core";
 import { CREATE_USERS_MUTATION } from "@/graphql/mutations";
 
 const { Option } = Select;
 
-const CreateUser: React.FC = () => {
+const CreateUser: React.FC<{ onClose: () => void; onSuccess: () => void }> = ({
+  onClose,
+  onSuccess,
+}) => {
   const go = useGo();
-
-  const goToListPage = () => {
-    go({
-      to: { resource: "users", action: "list" },
-      options: { keepQuery: true },
-      type: "replace",
-    });
-  };
 
   const { formProps, modalProps } = useModalForm({
     action: "create",
-    defaultVisible: true,
     resource: "users",
     redirect: false,
     mutationMode: "pessimistic",
-    errorNotification: () => {
-      return {
-        message: "Error",
-        description: `This email address is already used by another user.`,
-        type: "error",
-      };
+    onMutationSuccess: () => {
+      onSuccess();
+      onClose();
     },
-    onMutationSuccess: goToListPage,
     meta: {
       gqlMutation: CREATE_USERS_MUTATION,
     },
@@ -40,13 +30,7 @@ const CreateUser: React.FC = () => {
   const defaultTimezone = "UTC";
 
   return (
-    <Modal
-      {...modalProps}
-      mask={true}
-      onCancel={goToListPage}
-      title="Create User"
-      width={512}
-    >
+    <Drawer title="Create User" width={512} onClose={onClose} visible={true}>
       <Form {...formProps} layout="vertical">
         <Form.Item
           label="User name"
@@ -95,8 +79,13 @@ const CreateUser: React.FC = () => {
             <Option value="SALES_PERSON">Sales Person</Option>
           </Select>
         </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Create User
+          </Button>
+        </Form.Item>
       </Form>
-    </Modal>
+    </Drawer>
   );
 };
 
